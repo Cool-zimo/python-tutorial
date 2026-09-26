@@ -209,6 +209,8 @@
       if (holder) holder.replaceWith(box);
       else art.appendChild(box);
     });
+
+    return quizzes.length;
   }
 
   /* ================= 章末大测验 ================= */
@@ -229,24 +231,23 @@
     }
 
     const ctxKey = keyOf(bookId, testId);
-    const { quizzes } = MD.renderLesson(md);
-    paint(art, md, ctxKey);
+    const total = paint(art, md, ctxKey);
     $('book-title').textContent = `${book.title} · ${current.title}`;
     Notes.load(ctxKey);
 
-    // 全部做完后标记为"复习通过"
-    const total = quizzes.length;
-    const checkAll = () => {
+    // 全部做完后记为"本章复习通过"（进入下一档艾宾浩斯间隔）
+    if (window.__checkAll) document.removeEventListener('quiz:done', window.__checkAll);
+    window.__checkAll = () => {
       const results = Store.get(Store.K.QUIZ, {}) || {};
-      const done = Object.keys(results).filter(k => k.startsWith(ctxKey + ':'));
-      const okAll = done.filter(k => results[k].ok).length;
-      if (okAll >= total && total > 0) {
+      const mine = Object.keys(results).filter(k => k.startsWith(ctxKey + ':'));
+      const passed = mine.filter(k => results[k].ok).length;
+      if (total > 0 && passed >= total) {
         toast('🎉 本章大测验全部通过');
         Review.record(ctxKey, true);
         if (sync) sync.schedulePush();
       }
     };
-    document.addEventListener('quiz:done', checkAll);
+    document.addEventListener('quiz:done', window.__checkAll);
   }
 
   /* ================= 复习 ================= */
@@ -331,8 +332,10 @@
         Review.unlearn(k);
       }
       if (sync) sync.schedulePush();
+      // 局部重建，不整页刷新 —— 刷新会打断阅读位置，也浪费一次 Pyodide 加载
+      const old = art.querySelector('.lesson-done');
+      if (old) old.replaceWith(buildDoneBar(item));
       renderTOC();
-      location.reload(); // 简单可靠地刷新状态
     };
     wrap.appendChild(btn);
     return wrap;
