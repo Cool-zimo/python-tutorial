@@ -1,0 +1,68 @@
+name: 内容自检
+
+# 每次推送都检查一遍：JSON 是否合法、目录里声明的课文是否真的存在。
+# 内容用 Markdown 写，最容易出的错就是 toc.json 里列了一课、但 .md 忘了提交。
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 校验 JSON
+        run: |
+          python3 -c "
+          import json, sys, os
+          ok = True
+          for root, _, files in os.walk('content'):
+              for f in files:
+                  if not f.endswith('.json'): continue
+                  p = os.path.join(root, f)
+                  try:
+                      json.load(open(p, encoding='utf-8'))
+                      print('OK  ', p)
+                  except Exception as e:
+                      ok = False
+                      print('FAIL', p, e)
+          sys.exit(0 if ok else 1)
+          "
+
+      - name: 校验目录与课文一一对应
+        run: |
+          python3 -c "
+          import json, sys, os
+          books = json.load(open('content/books.json', encoding='utf-8'))
+          ok = True
+          for b in books:
+              bid = b['id']
+              toc_path = f'content/books/{bid}/toc.json'
+              if not os.path.exists(toc_path):
+                  print(f\"SKIP {bid}: 还没有目录\")
+                  continue
+              toc = json.load(open(toc_path, encoding='utf-8'))
+              for ch in toc:
+                  for it in ch['items']:
+                      p = f\"content/books/{bid}/lessons/{it['id']}.md\"
+                      if not os.path.exists(p):
+                          ok = False
+                          print(f'MISS {p}')
+                  if ch.get('test'):
+                      p = f\"content/books/{bid}/lessons/{ch['test']}.md\"
+                      if not os.path.exists(p):
+                          ok = False
+                          print(f'MISS {p}')
+              n = sum(len(c['items']) for c in toc)
+              print(f\"OK   {bid}: {len(toc)} 章 / {n} 课\")
+          sys.exit(0 if ok else 1)
+          "
+
+      - name: JS 语法检查
+        run: |
+          for f in js/*.js; do node --check "$f" || exit 1; done
+          echo "JS 全部通过"
