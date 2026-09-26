@@ -1,0 +1,128 @@
+[
+  {
+    "id": "py-basics-1",
+    "title": "Python 详细基础 1",
+    "subtitle": "从零开始，把每一行都讲透",
+    "desc": "面向完全零基础。不假设你懂任何编程概念，每个知识点都从「它解决什么问题」讲起，配可运行示例和即时练习。",
+    "stage": "基础",
+    "level": "入门",
+    "ready": true
+  },
+  {
+    "id": "py-basics-2",
+    "title": "Python 详细基础 2",
+    "subtitle": "数据结构与函数",
+    "desc": "列表、元组、字典、集合的用法与底层取舍；函数的参数、作用域、递归。",
+    "stage": "基础",
+    "level": "入门",
+    "ready": false
+  },
+  {
+    "id": "py-basics-3",
+    "title": "Python 详细基础 3",
+    "subtitle": "文件、异常、模块与面向对象",
+    "desc": "读写文件、捕获异常、组织模块，以及类与对象的完整心智模型。",
+    "stage": "基础",
+    "level": "进阶",
+    "ready": false
+  },
+  {
+    "id": "py-essentials",
+    "title": "精简基础 · 学习篇",
+    "subtitle": "两天过一遍 Python 全貌",
+    "desc": "给学过一次、需要快速捡起来的人。只讲主干，去掉所有铺垫。",
+    "stage": "基础",
+    "level": "复习",
+    "ready": false
+  },
+  {
+    "id": "py-essentials-2",
+    "title": "精简基础 · 巩固篇",
+    "subtitle": "用题目把基础钉死",
+    "desc": "不重复讲概念，全部用题目驱动，把基础阶段的易错点一次性扫光。",
+    "stage": "基础",
+    "level": "复习",
+    "ready": false
+  },
+  {
+    "id": "data-analysis-1",
+    "title": "Python 数据分析 1",
+    "subtitle": "NumPy 与数组思维",
+    "desc": "从 Python 列表到 ndarray 的思维转换：向量化、广播、索引技巧。",
+    "stage": "数据",
+    "level": "进阶",
+    "ready": false
+  },
+  {
+    "id": "data-analysis-2",
+    "title": "Python 数据分析 2",
+    "subtitle": "pandas 与表格处理",
+    "desc": "DataFrame 的完整操作体系：清洗、分组、合并、时间序列。",
+    "stage": "数据",
+    "level": "进阶",
+    "ready": false
+  },
+  {
+    "id": "data-analysis-3",
+    "title": "Python 数据分析 3",
+    "subtitle": "可视化与实战",
+    "desc": "matplotlib / seaborn 出图，以及一个端到端的真实数据分析项目。",
+    "stage": "数据",
+    "level": "实战",
+    "ready": false
+  },
+  {
+    "id": "gui-beginner-1",
+    "title": "Python 窗口入门 1",
+    "subtitle": "tkinter 基础",
+    "desc": "窗口、控件、布局、事件绑定 —— 做出第一个能用的桌面程序。",
+    "stage": "桌面",
+    "level": "入门",
+    "ready": false
+  },
+  {
+    "id": "gui-beginner-2",
+    "title": "Python 窗口入门 2",
+    "subtitle": "tkinter 进阶与 pygame",
+    "desc": "菜单、对话框、Canvas 绘图；pygame 的游戏循环与精灵。",
+    "stage": "桌面",
+    "level": "进阶",
+    "ready": false
+  },
+  {
+    "id": "gui-beginner-3",
+    "title": "Python 窗口入门 3",
+    "subtitle": "完整桌面项目",
+    "desc": "做一个带数据存储的实用工具，从需求到打包发布走完整流程。",
+    "stage": "桌面",
+    "level": "实战",
+    "ready": false
+  },
+  {
+    "id": "qt-1",
+    "title": "Python 窗口进阶 1",
+    "subtitle": "PyQt / PySide 核心",
+    "desc": "信号与槽、布局管理、常用控件、样式表 —— Qt 的心智模型。",
+    "stage": "桌面",
+    "level": "进阶",
+    "ready": false
+  },
+  {
+    "id": "qt-2",
+    "title": "Python 窗口进阶 2",
+    "subtitle": "Qt 高级主题与发布",
+    "desc": "模型视图、多线程、自定义控件、国际化，以及打包成安装包。",
+    "stage": "桌面",
+    "level": "高级",
+    "ready": false
+  },
+  {
+    "id": "engineering",
+    "title": "Python 工程实践",
+    "subtitle": "从会写到能交付",
+    "desc": "虚拟环境、项目结构、Git 协作、单元测试、日志、打包发布。",
+    "stage": "工程",
+    "level": "实战",
+    "ready": false
+  }
+]
